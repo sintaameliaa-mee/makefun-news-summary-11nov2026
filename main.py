@@ -1,15 +1,9 @@
-"""news-summary-01 entry v2: copies summary.txt to /output/entry.txt.
+"""news-summary-01 v2 entrypoint: write summary.txt to the output file."""
 
-Python 3.13, standard library only. Deterministic: the same bytes every run.
-Local test: mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
-"""
-
+from pathlib import Path
 import os
-import shutil
 
-out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
-os.makedirs(out_dir, exist_ok=True)
-shutil.copyfile(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "summary.txt"),
-    os.path.join(out_dir, "entry.txt"),
-)
+src = Path(__file__).resolve().parent / "summary.txt"
+dst = Path(os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output") / "entry.txt"
+dst.parent.mkdir(parents=True, exist_ok=True)
+dst.write_bytes(src.read_bytes())
