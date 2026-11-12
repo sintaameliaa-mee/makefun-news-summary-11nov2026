@@ -1,4 +1,4 @@
-"""news-summary-01 entry: copies summary.txt to /output/entry.txt.
+"""news-summary-01 entry v2: copies summary.txt to /output/entry.txt.
 
 Python 3.13, standard library only. Deterministic: the same bytes every run.
 Local test: mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
